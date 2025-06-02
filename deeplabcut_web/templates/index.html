@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Análisis Automático de Poses en Animales</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <form id="uploadForm" action="/procesar" method="post" enctype="multipart/form-data">
+        <h2>Análisis Automático de Poses en Animales</h2>
+        <p class="subtitulo">Introduce tus datos para el análisis</p>
+
+        <div class="dropzone-container">
+            <!-- Zona ZIP -->
+            <div id="dropzoneZip" class="dropzone">Suelta aquí tu ZIP del proyecto DeepLabCut</div>
+            <input type="file" name="archivos" id="fileInputZip" accept=".zip" style="display:none" />
+
+            <!-- Zona Videos -->
+            <div id="dropzoneVideo" class="dropzone">Suelta aquí uno o más videos (.mp4, .mov, .avi...)</div>
+            <input type="file" name="videos" id="fileInputVideo" accept="video/*" multiple style="display:none" />
+
+            <!-- Zona Modelo -->
+            <div id="dropzoneModel" class="dropzone">
+                Suelta aquí tu modelo (knn, svm, random forest, logistic regression, decision tree o naive bayes)
+            </div>
+            <input type="file" name="modelo" id="fileInputModel" accept=".pkl,.joblib,.txt" style="display:none" />
+        </div>
+
+        <div class="buttons">
+            <input type="submit" value="Enviar" id="btnEnviar" />
+            <button type="button" id="btnLimpiar">Limpiar</button>
+        </div>
+    </form>
+
+    <div id="spinner" class="spinner" style="display: none;">
+        <div class="lds-ring">
+            <div></div><div></div><div></div><div></div>
+        </div>
+    </div>
+
+
+
+    <!-- # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # -->
+    <!-- # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # -->
+    <!-- # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # -->
+
+    <!-- Botón flotante del chat -->
+    <div id="chatBoton" class="chat-boton" title="¿Necesitas ayuda?">
+        🤖
+    </div>
+
+    <!-- Panel del chat -->
+    <div id="chatVentana" class="chat-ventana oculto">
+        <div class="chat-header">
+            <span>Asistente Virtual</span>
+            <button id="btnCerrarChat" class="cerrar-chat" title="Cerrar">x</button>
+        </div>
+        <div class="chat-cuerpo">
+            <p>Hola 👋 ¿En qué puedo ayudarte?</p>
+        </div>
+        <div class="chat-footer">
+            <button class="chat-btn" data-key="comoFunciona">¿Cómo funciona?</button>
+            <button class="chat-btn" data-key="paraQueSirve">¿Para qué sirve?</button>
+            <button class="chat-btn" data-key="esAutomatico">¿Es automático?</button>
+            <button class="chat-btn" data-key="esGeneralizado">¿Es generalizado?</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+
+    <!-- # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # -->
+    <!-- # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # -->
+    <!-- # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # -->
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <script src="{{ url_for('static', filename='js/helpers.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dropzone_zip.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dropzone_video.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dropzone_model.js') }}"></script>
+</body>
+</html>  
